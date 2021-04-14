@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>My Todo List</h1>
+    <a href="{% url 'task-create' %}">Add Task</a>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th></th>
+        </tr>
+        <!-- by default it is called object_list, but we can rename that in the views.py file -->
+        {% for task in tasks %}
+            <tr>
+                <td>{{task.title}}</td>
+                <td><a href="{% url 'task' task.id %}">View</a></td>
+                <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
+                <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
+            </tr>
+        {% empty %}
+            <h3>No itmes found!</h3>
+        {% endfor %}
+    </table> 
+</body>
+</html>
